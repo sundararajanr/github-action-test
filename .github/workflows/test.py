@@ -1,5 +1,5 @@
 def main():
-  print("GitHub Actions test for python script!")
+  print("GitHub Actions -Successfully tested!")
 
 if __name__ == '__main__':
   main()
