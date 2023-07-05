@@ -20,22 +20,16 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 5
       - name: Install jq tool
         run: |
           sudo apt-get update
           sudo apt-get install jq
-    
-      - name: Get Commit Details
-        run: |
-          commit_sha="${{ github.event.after }}"
-          response=$(curl -sSL \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/commits/$commit_sha")
-            echo "$response" > commit.json
-    
-      - name: Extract File Names
-        run: |
-          # updated_files=$(jq -r '.files[].filename' commit.json)
-          # echo "$updated_files" > updated_files.txt
-          echo $(git diff-tree --no-commit-id --patch-with-raw -r HEAD)                    
+      
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            echo "Do something with this ${changed_file}."
+          done
