@@ -31,6 +31,6 @@ jobs:
      
       - name: REST API with curl
         run: |
-          curl -s https://api.github.com/ENDPOINT | jq '[.files | .[] | select(.status == "modified")]'
+          curl -X https://api.github.com/ENDPOINT | jq '[.files | .[] | select(.status == "modified")]'
 
       
