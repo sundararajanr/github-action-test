@@ -36,6 +36,6 @@ jobs:
     
       - name: Extract File Names
         run: |
-          updated_files=$(jq -r '.files[].filename' commit.json)
-          echo "$updated_files" > updated_files.txt
+          # updated_files=$(jq -r '.files[].filename' commit.json)
+          # echo "$updated_files" > updated_files.txt
           echo $(git diff-tree --no-commit-id --patch-with-raw -r HEAD)                    
