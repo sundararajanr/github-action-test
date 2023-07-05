@@ -38,5 +38,5 @@ jobs:
         run: |
           updated_files=$(jq -r '.files[].filename' commit.json)
           echo "$updated_files" > updated_files.txt
-          # cat updated_files.txt
+          echo updated_files
             
